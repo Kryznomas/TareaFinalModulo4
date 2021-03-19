@@ -1,32 +1,35 @@
 <template>
-<div>
-    <b-form class= "mb-5">
-      <b-form-group 
-      id="input-group-1" 
-      label="Nombre:" 
-      label-for="input-1"
-      label-cols-sm="2">
-      
+  <div>
+    <b-form class="mb-5">
+      <b-form-group
+        id="input-group-1"
+        label="Nombre:"
+        label-for="input-1"
+        label-cols-sm="2"
+      >
         <b-form-input
           id="input-1"
           v-model="producto.nombre"
           type="text"
           nombre="nombre"
           placeholder="Ingrese nombre del producto"
-          required>
+          required
+        >
         </b-form-input>
       </b-form-group>
-      <b-form-group 
-      id="input-group-2" 
-      label="Categoría:" 
-      label-for="input-2"
-      label-cols-sm="2">
+      <b-form-group
+        id="input-group-2"
+        label="Categoría:"
+        label-for="input-2"
+        label-cols-sm="2"
+      >
         <b-form-input
           id="input-2"
           v-model="producto.categoria"
-          categoria= "categoria"
+          categoria="categoria"
           placeholder="Ingrese la categoría del producto"
-          required>
+          required
+        >
         </b-form-input>
       </b-form-group>
 
@@ -34,64 +37,68 @@
         id="input-group-3"
         label="Stock diponible:"
         label-for="input-1"
-        label-cols-sm="2">
+        label-cols-sm="2"
+      >
         <b-form-input
           id="input-3"
           v-model="producto.stock"
           stock="stock"
           type="number"
           placeholder="Ingrese la cantidad disponible"
-          required>
+          required
+        >
         </b-form-input>
       </b-form-group>
-      
+
       <b-form-group
         id="input-group-4"
         label="Peso:"
         label-for="input-1"
-        label-cols-sm="2">
+        label-cols-sm="2"
+      >
         <b-form-input
           id="input-4"
           v-model="producto.peso"
           peso="peso"
           type="number"
           placeholder="Ingrese el peso del producto en gramos"
-          required>
+          required
+        >
         </b-form-input>
       </b-form-group>
-      <b-button 
-      @click.prevent="agregarProducto()" 
-      size="md"
-      variant="primary"
-      class="px-3"
-      >Agregar</b-button>
+      <b-button
+        @click.prevent="agregarProducto()"
+        size="md"
+        variant="primary"
+        class="px-3"
+        >Agregar</b-button
+      >
     </b-form>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations } from "vuex";
 export default {
   name: "Formulario",
   data() {
-      return {
-        producto: {
-          nombre: '',
-          categoria: '',
-          stock: null,
-          peso: '',
-        },
-        show: true
-      }
-    },
-    methods: {
+    return {
+      producto: {
+        nombre: "",
+        categoria: "",
+        stock: null,
+        peso: "",
+      },
+      show: true,
+    };
+  },
+  methods: {
+    ...mapMutations(["ADD_PRODUCT"]),
 
-      ...mapMutations(["ADD_PRODUCT"]),
-
-      agregarProducto(){
+    agregarProducto() {
       this.ADD_PRODUCT(this.producto);
     },
-    }
+  },
 };
 </script>
 

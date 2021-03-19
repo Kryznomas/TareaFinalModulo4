@@ -1,10 +1,8 @@
 <template>
   <div id="app">
     <h2>Constrol de stock Tienda Shina</h2>
-    <Formulario>
-    </Formulario>
+    <Formulario> </Formulario>
     <Lista></Lista>
-
   </div>
 </template>
 <script>
@@ -16,7 +14,7 @@ export default {
   components: {
     Lista,
     Formulario,
-  }
+  },
 };
 </script>
 
@@ -29,7 +27,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-h2{
+h2 {
   text-align: center;
   margin-bottom: 2rem;
 }

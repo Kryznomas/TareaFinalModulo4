@@ -21,10 +21,10 @@
             ></b-form-input>
             <b-input-group-append>
               <b-button
-                :disabled="!filter" 
-              @click="filter = ''" 
-              variant="primary"
-              >Limpiar</b-button
+                :disabled="!filter"
+                @click="filter = ''"
+                variant="primary"
+                >Limpiar</b-button
               >
             </b-input-group-append>
           </b-input-group>
@@ -63,25 +63,26 @@
         {{ row.value.first }} {{ row.value.last }}
       </template>
 
-      <template #cell(actions)="row" >
+      <template #cell(actions)="row">
         <div class="d-flex justify-content-center">
-        <!-- -------------Boton Modal------------ -->
-        <b-button
-          size="sm"
-          @click="info(row.item, $event.target)"
-          class="px-4 mx-1"
-          variant="warning"
-        >
-          Editar
-        </b-button>
-        <!-- -------------Boton Borrar----------- -->
-        <b-button 
-          size="sm" 
-          class="px-4 mx-1"
-          @click="DELETE_PRODUCT(row.item.id)" 
-          variant="danger">
-          Borrar
-        </b-button>
+          <!-- -------------Boton Modal------------ -->
+          <b-button
+            size="sm"
+            @click="info(row.item, $event.target)"
+            class="px-4 mx-1"
+            variant="warning"
+          >
+            Editar
+          </b-button>
+          <!-- -------------Boton Borrar----------- -->
+          <b-button
+            size="sm"
+            class="px-4 mx-1"
+            @click="DELETE_PRODUCT(row.item.id)"
+            variant="danger"
+          >
+            Borrar
+          </b-button>
         </div>
       </template>
     </b-table>
@@ -95,30 +96,29 @@
     >
       <b-form>
         <b-form-group
-        id="input-group-1" 
-        label="Nombre del Produto:" 
-        label-for="input-1">
+          id="input-group-1"
+          label="Nombre del Produto:"
+          label-for="input-1"
+        >
           <b-form-input
             id="input-1"
             v-model="productoEditado.nombre"
             type="text"
             nombre="nombre"
             placeholder="Ingrese nombre del producto"
-            required>
+            required
+          >
           </b-form-input>
         </b-form-group>
 
-        <b-form-group 
-        id="input-group-2" 
-        label="Categoría:" 
-        label-for="input-2"
-        >
+        <b-form-group id="input-group-2" label="Categoría:" label-for="input-2">
           <b-form-input
             id="input-2"
             v-model="productoEditado.categoria"
-          categoria= "categoria"
-          placeholder="Ingrese la categoría del producto"
-          required>
+            categoria="categoria"
+            placeholder="Ingrese la categoría del producto"
+            required
+          >
           </b-form-input>
         </b-form-group>
 
@@ -135,13 +135,10 @@
             placeholder="Ingrese la cantidad disponible"
             required
           >
-        </b-form-input>
-      </b-form-group>
-      
-      <b-form-group
-        id="input-group-4"
-        label="Peso:"
-        label-for="input-1">
+          </b-form-input>
+        </b-form-group>
+
+        <b-form-group id="input-group-4" label="Peso:" label-for="input-1">
           <b-form-input
             id="input-4"
             v-model="productoEditado.peso"
@@ -150,13 +147,14 @@
             placeholder="Ingrese el peso del producto en gramos"
             required
           >
-        </b-form-input>
-      </b-form-group>
-      <b-button 
-      @click="EDIT_PRODUCT(productoEditado)" 
-      variant="warning"
-      size="md"
-      >Modificar</b-button>
+          </b-form-input>
+        </b-form-group>
+        <b-button
+          @click="EDIT_PRODUCT(productoEditado)"
+          variant="warning"
+          size="md"
+          >Modificar</b-button
+        >
       </b-form>
     </b-modal>
   </b-container>
@@ -181,29 +179,29 @@ export default {
         {
           key: "id",
           label: "Id",
-          sortable: true
+          sortable: true,
         },
         {
           key: "nombre",
           label: "Nombre del Producto",
-          sortable: true
+          sortable: true,
         },
         {
           key: "categoria",
           label: "Categoría",
-          sortable: true
+          sortable: true,
         },
         {
           key: "stock",
           label: "Stock",
-          sortable: true
+          sortable: true,
         },
         {
           key: "peso",
           label: "Peso (grs)",
-          sortable: true
+          sortable: true,
         },
-        { key: "actions", label: "Acciones" }
+        { key: "actions", label: "Acciones" },
       ],
       totalRows: 1,
       currentPage: 1,
@@ -216,8 +214,8 @@ export default {
       infoModal: {
         id: "info-modal",
         title: "",
-        content: ""
-      }
+        content: "",
+      },
     };
   },
   computed: {
@@ -225,11 +223,11 @@ export default {
     sortOptions() {
       // Create an options list from our fields
       return this.fields
-        .filter(f => f.sortable)
-        .map(f => {
+        .filter((f) => f.sortable)
+        .map((f) => {
           return { text: f.label, value: f.key };
         });
-    }
+    },
   },
   mounted() {
     // Set the initial number of items
@@ -238,24 +236,22 @@ export default {
   methods: {
     ...mapMutations(["ADD_PRODUCT", "DELETE_PRODUCT", "EDIT_PRODUCT"]),
 
-
     info(item, button) {
-      this.productoEditado = {
+      (this.productoEditado = {
         nombre: "",
         categoria: "",
         stock: null,
         peso: "",
-        id: "", 
-      },
-      this.infoModal.title = `Edite el producto`;
+        id: "",
+      }),
+        (this.infoModal.title = `Edite el producto`);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
       this.productoEditado.nombre = item.nombre;
       this.productoEditado.categoria = item.categoria;
       this.productoEditado.stock = item.stock;
       this.productoEditado.peso = item.peso;
       this.productoEditado.id = item.id;
-      console.log(this.productoEditado)
-      
+      console.log(this.productoEditado);
     },
     resetInfoModal() {
       this.infoModal.title = "";
@@ -265,7 +261,7 @@ export default {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
-    }
-  }
+    },
+  },
 };
 </script>
