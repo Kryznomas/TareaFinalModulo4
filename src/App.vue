@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h2>Constrol de stock Tienda Shina</h2>
+    <h2>Control de stock Tienda Shina</h2>
     <Formulario> </Formulario>
     <Lista></Lista>
   </div>
